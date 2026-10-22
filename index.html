@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<meta name="theme-color" content="#f6f3ee">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Analista de activos</title>
 <meta name="description" content="Agente de IA que analiza un activo con reportes oficiales: la IA lee y redacta, el código calcula y verifica.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2304060a'/%3E%3Cpath d='M5 22l7-8 5 5 10-12' fill='none' stroke='%232dd4d4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f6f3ee'/%3E%3Cpath d='M5 22l7-8 5 5 10-12' fill='none' stroke='%233d756e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -42,16 +43,19 @@
       (semáforo verde del curso). Sin clave puedes usar el ejemplo y los cálculos.</p>
   </section>
 
-  <section class="card" id="s-caso">
-    <h2><span class="n">2</span> ¿Qué quieres hacer?</h2>
-    <div id="casos" class="casos" role="radiogroup" aria-label="Caso de uso"></div>
-    <label id="caja-tesis" hidden>Tu tesis de inversión (qué crees que pasará y por qué)
-      <textarea id="tesis" rows="3" placeholder="Ej.: Compraría NFLX porque los ingresos crecen más de 10% y el margen se mantiene…"></textarea>
-    </label>
+  <section class="card" id="s-chat">
+    <h2>Conversa con el agente</h2>
+    <p class="nota">Pregúntale lo que quieras sobre el activo que cargues, o sobre cómo trabaja. Responde solo con las cifras de tus datos.</p>
+    <div id="sugerencias" class="sugerencias"></div>
+    <div id="chat-log" class="chat-log" aria-live="polite"></div>
+    <div class="chat-in">
+      <textarea id="chat-input" rows="2" placeholder="Escribe tu pregunta… (Enter envía, Shift+Enter salto de línea)"></textarea>
+      <button id="btn-enviar" class="btn">Enviar</button>
+    </div>
   </section>
 
   <section class="card" id="s-datos">
-    <h2><span class="n">3</span> Datos del activo</h2>
+    <h2><span class="n">2</span> Datos del activo</h2>
     <div class="tabs" role="tablist">
       <button class="tab on" data-tab="docs" role="tab">Subir reportes oficiales</button>
       <button class="tab" data-tab="json" role="tab">Pegar JSON</button>
@@ -80,7 +84,7 @@
   </section>
 
   <section class="card" id="s-rev" hidden>
-    <h2><span class="n">4</span> Revisa lo que se extrajo</h2>
+    <h2><span class="n">3</span> Revisa lo que se extrajo</h2>
     <p class="nota">Esto es lo único que la IA leyó. Compara 3 cifras con el documento original y corrige aquí si algo está mal.</p>
     <div id="cuadres" class="cuadres"></div>
     <textarea id="json" rows="14" spellcheck="false"></textarea>
@@ -88,7 +92,7 @@
   </section>
 
   <section class="card" id="s-res" hidden>
-    <h2><span class="n">5</span> Indicadores</h2>
+    <h2><span class="n">4</span> Indicadores</h2>
     <div id="titulo-res" class="titulo-res"></div>
     <div id="tiles" class="tiles"></div>
     <div class="grid2 charts">
@@ -102,6 +106,14 @@
     <h3>Sensibilidad</h3>
     <div id="sens" class="tabla-wrap"></div>
     <details><summary>Todos los periodos</summary><div id="tabla" class="tabla-wrap"></div></details>
+  <div id="s-caso">
+    <h3>Tipo de informe</h3>
+    <div id="casos" class="casos" role="radiogroup" aria-label="Caso de uso"></div>
+    <label id="caja-tesis" hidden>Tu tesis de inversión (qué crees que pasará y por qué)
+      <textarea id="tesis" rows="3" placeholder="Ej.: Compraría NFLX porque los ingresos crecen más de 10% y el margen se mantiene…"></textarea>
+    </label>
+  </div>
+
     <div class="acciones">
       <label class="chk"><input id="critica" type="checkbox"> Pedir crítica de un segundo paso (usa más cuota)</label>
       <button id="btn-redactar" class="btn">Redactar informe con Gemini</button>
@@ -109,7 +121,7 @@
   </section>
 
   <section class="card" id="s-inf" hidden>
-    <h2><span class="n">6</span> Informe verificado</h2>
+    <h2><span class="n">5</span> Informe verificado</h2>
     <div id="verif" class="callout"></div>
     <article id="informe" class="informe"></article>
     <div id="crit" class="callout" hidden></div>

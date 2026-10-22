@@ -3,8 +3,9 @@
   "use strict";
   const C = window.Calculos, G = window.Gemini;
   const $ = (id) => document.getElementById(id);
+  const SUGERENCIAS = ["¿Qué haces y cómo trabajas?", "¿Cómo va el último periodo frente a la guía?", "¿Qué cambió frente al año pasado?", "¿Qué debo verificar antes de usar estos datos?"];
   const ARCHIVOS_CONTEXTO = ["00-rol-y-limites.md", "01-metodo.md", "02-indicadores-y-umbrales.md", "03-fuentes-oficiales.md", "04-formatos-de-entrega.md"];
-  const est = { cfg: null, casos: [], caso: null, sistema: "", extraccion: "", datos: null, calculos: null, informe: "", docs: [] };
+  const est = { cfg: null, casos: [], caso: null, sistema: "", extraccion: "", datos: null, calculos: null, informe: "", docs: [], conversacion: "", hist: [] };
 
   // ---------------------------------------------------------- utilidades
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -46,17 +47,17 @@
     let mn = Math.min(...ok), mx = Math.max(...ok); const pad = (mx - mn) * 0.2 || 1; mn -= pad; mx += pad;
     const X = (i) => pl + (i * (W - pl - pr)) / (etqs.length - 1), Y = (x) => pt + (1 - (x - mn) / (mx - mn)) * (H - pt - pb);
     let d = "", pts = "";
-    vals.forEach((x, i) => { if (typeof x !== "number") return; d += (d ? "L" : "M") + X(i).toFixed(1) + " " + Y(x).toFixed(1); pts += `<circle cx="${X(i).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="3.5" fill="#2dd4d4"><title>${etqs[i]}: ${nf(x, 1)}${sufijo}</title></circle>`; });
-    const ticks = [mn + pad, (mn + mx) / 2, mx - pad].map((t) => `<text x="${pl - 6}" y="${Y(t) + 4}" text-anchor="end" fill="#9aa6bd" font-size="11">${nf(t, 1)}</text><line x1="${pl}" x2="${W - pr}" y1="${Y(t)}" y2="${Y(t)}" stroke="#384258" stroke-dasharray="3 4"/>`).join("");
-    const lab = etqs.map((e, i) => `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" fill="#9aa6bd" font-size="10.5">${e}</text>`).join("");
-    return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Línea de ${etqs[0]} a ${etqs[etqs.length - 1]}">${ticks}<path d="${d}" fill="none" stroke="#2dd4d4" stroke-width="2.5"/>${pts}${lab}</svg>`;
+    vals.forEach((x, i) => { if (typeof x !== "number") return; d += (d ? "L" : "M") + X(i).toFixed(1) + " " + Y(x).toFixed(1); pts += `<circle cx="${X(i).toFixed(1)}" cy="${Y(x).toFixed(1)}" r="3.5" fill="#3d756e"><title>${etqs[i]}: ${nf(x, 1)}${sufijo}</title></circle>`; });
+    const ticks = [mn + pad, (mn + mx) / 2, mx - pad].map((t) => `<text x="${pl - 6}" y="${Y(t) + 4}" text-anchor="end" fill="#6b7770" font-size="11">${nf(t, 1)}</text><line x1="${pl}" x2="${W - pr}" y1="${Y(t)}" y2="${Y(t)}" stroke="#e3dccf" stroke-dasharray="3 4"/>`).join("");
+    const lab = etqs.map((e, i) => `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" fill="#6b7770" font-size="10.5">${e}</text>`).join("");
+    return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Línea de ${etqs[0]} a ${etqs[etqs.length - 1]}">${ticks}<path d="${d}" fill="none" stroke="#3d756e" stroke-width="2.5"/>${pts}${lab}</svg>`;
   }
   function barrasSVG(etqs, vals) {
     const W = 460, H = 190, pl = 40, pr = 10, pt = 14, pb = 28, ok = vals.filter((x) => typeof x === "number");
     if (!ok.length) return "<p class='nota'>Faltan datos para este gráfico.</p>";
     const mx = Math.max(...ok) * 1.08, bw = (W - pl - pr) / etqs.length;
-    let s = [0, mx / 2, mx].map((t) => { const y = pt + (1 - t / mx) * (H - pt - pb); return `<line x1="${pl}" x2="${W - pr}" y1="${y}" y2="${y}" stroke="#384258" stroke-dasharray="3 4"/><text x="${pl - 6}" y="${y + 4}" text-anchor="end" fill="#9aa6bd" font-size="11">${nf(t, 0)}</text>`; }).join("");
-    vals.forEach((x, i) => { if (typeof x !== "number") return; const h = (x / mx) * (H - pt - pb), xx = pl + i * bw + bw * 0.18; s += `<rect x="${xx.toFixed(1)}" y="${(H - pb - h).toFixed(1)}" width="${(bw * 0.64).toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="#3987e5"><title>${etqs[i]}: ${nf(x, 1)}</title></rect><text x="${(xx + bw * 0.32).toFixed(1)}" y="${H - 8}" text-anchor="middle" fill="#9aa6bd" font-size="10.5">${etqs[i]}</text>`; });
+    let s = [0, mx / 2, mx].map((t) => { const y = pt + (1 - t / mx) * (H - pt - pb); return `<line x1="${pl}" x2="${W - pr}" y1="${y}" y2="${y}" stroke="#e3dccf" stroke-dasharray="3 4"/><text x="${pl - 6}" y="${y + 4}" text-anchor="end" fill="#6b7770" font-size="11">${nf(t, 0)}</text>`; }).join("");
+    vals.forEach((x, i) => { if (typeof x !== "number") return; const h = (x / mx) * (H - pt - pb), xx = pl + i * bw + bw * 0.18; s += `<rect x="${xx.toFixed(1)}" y="${(H - pb - h).toFixed(1)}" width="${(bw * 0.64).toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="#7a9cc0"><title>${etqs[i]}: ${nf(x, 1)}</title></rect><text x="${(xx + bw * 0.32).toFixed(1)}" y="${H - 8}" text-anchor="middle" fill="#6b7770" font-size="10.5">${etqs[i]}</text>`; });
     return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Barras de ingresos por periodo">${s}</svg>`;
   }
 
@@ -70,10 +71,11 @@
       est.casos = await (await traer("config/casos.json")).json();
       const partes = await Promise.all(ARCHIVOS_CONTEXTO.map(async (a) => await (await traer("contexto/" + a)).text()));
       est.sistema = partes.join("\n\n---\n\n");
+      est.conversacion = await (await traer("contexto/05-conversacion.md")).text();
       est.extraccion = await (await traer("contexto/extraccion.md")).text();
       $("ctx").textContent = est.sistema;
     } catch (e) { estado("No pude cargar la configuración: " + e.message, "err"); }
-    dibujarCasos(); eventos();
+    dibujarCasos(); dibujarSugerencias(); eventos();
   }
 
   function dibujarCasos() {
@@ -104,6 +106,8 @@
     $("btn-ejemplo").onclick = async () => { try { mostrarDatos(await (await traer("datos/ejemplo_netflix.json")).json()); } catch (e) { estado(e.message, "err"); } };
     $("btn-pegar").onclick = () => { try { mostrarDatos(JSON.parse($("json-pegado").value)); } catch (e) { estado("El JSON no es válido: " + e.message, "err"); } };
     $("btn-calcular").onclick = calcular;
+    $("btn-enviar").onclick = () => enviarChat($("chat-input").value);
+    $("chat-input").onkeydown = (ev) => { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); enviarChat($("chat-input").value); } };
     $("btn-redactar").onclick = redactar;
     $("btn-copiar").onclick = () => { navigator.clipboard && navigator.clipboard.writeText(est.informe).then(() => estado("Texto copiado.", "ok")); };
     $("btn-bajar").onclick = () => {
@@ -207,6 +211,37 @@
       }
       estado(`Informe listo (modelo ${r.modelo}).`, "ok"); $("s-inf").scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (e) { estado(e.message, "err"); } finally { $("btn-redactar").disabled = false; }
+  }
+
+  // ---------------------------------------------------------- chat
+  function dibujarSugerencias() {
+    $("sugerencias").innerHTML = "";
+    SUGERENCIAS.forEach((t) => { const b = document.createElement("button"); b.className = "sug"; b.textContent = t; b.onclick = () => enviarChat(t); $("sugerencias").appendChild(b); });
+  }
+  function burbuja(rol, html) {
+    const d = document.createElement("div"); d.className = "msg " + rol; d.innerHTML = html;
+    $("chat-log").appendChild(d); d.scrollIntoView({ block: "nearest", behavior: "smooth" }); return d;
+  }
+  async function enviarChat(texto) {
+    texto = (texto || "").trim(); if (!texto) return;
+    const o = opcionesIA();
+    burbuja("yo", esc(texto)); $("chat-input").value = "";
+    if (!o.clave) return burbuja("agente", "Para conversar necesito tu clave de API. Pégala en el paso 1 y vuelve a escribirme.");
+    const ctx = est.datos ? "DATOS Y CÁLCULOS ACTUALES:\n" + JSON.stringify({ datos: est.datos, calculos: est.calculos || C.analizar(est.datos, est.cfg) }) : "DATOS Y CÁLCULOS ACTUALES: ninguno todavía (la persona aún no ha cargado un activo).";
+    est.hist.push({ role: "user", parts: [{ text: texto }] });
+    const espera = burbuja("agente espera", "Pensando…"); $("btn-enviar").disabled = true;
+    try {
+      const r = await G.conversar({ ...o, sistema: est.sistema + "\n\n---\n\n" + est.conversacion + "\n\n---\n\n" + ctx, contents: est.hist.slice(-14) });
+      est.hist.push({ role: "model", parts: [{ text: r.texto }] });
+      let extra = "";
+      if (est.datos) {
+        const sos = C.verificarInforme(r.texto, est.datos, est.calculos || C.analizar(est.datos, est.cfg));
+        if (sos.length) extra = `<p class="nota">Revisa estas cifras, no las encontré en tus datos: ${sos.map((x) => `<mark>${esc(x)}</mark>`).join(", ")}.</p>`;
+      }
+      espera.className = "msg agente"; espera.innerHTML = md(r.texto) + extra; estado("");
+    } catch (e) {
+      est.hist.pop(); espera.className = "msg agente err"; espera.textContent = e.message;
+    } finally { $("btn-enviar").disabled = false; }
   }
 
   iniciar();

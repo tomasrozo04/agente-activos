@@ -38,7 +38,7 @@
     if (!o.clave) throw new Error("Falta la clave de API de Gemini.");
     const modelos = [o.modelo, o.respaldo].filter((m, i, a) => m && a.indexOf(m) === i);
     const cuerpo = {
-      contents: [{ role: "user", parts: o.partes }],
+      contents: o.contents || [{ role: "user", parts: o.partes }],
       generationConfig: { temperature: o.temperatura === undefined ? 0.2 : o.temperatura },
     };
     if (o.sistema) cuerpo.systemInstruction = { parts: [{ text: o.sistema }] };
@@ -124,5 +124,10 @@
     return generar({ ...o, partes, json: false, temperatura: 0 });
   }
 
-  return { generar, extraer, redactar, criticar, parsearJSON, ESQUEMA_EXTRACCION };
+  /** Conversación: o.contents = [{role:"user"|"model", parts:[{text}]}, ...] */
+  async function conversar(o) {
+    return generar({ ...o, json: false, temperatura: 0.4 });
+  }
+
+  return { generar, conversar, extraer, redactar, criticar, parsearJSON, ESQUEMA_EXTRACCION };
 });
