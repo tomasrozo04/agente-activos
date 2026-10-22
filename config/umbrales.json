@@ -1,0 +1,17 @@
+{
+  "_nota": "Umbrales del semáforo. Son supuestos del usuario, no de la empresa. Edítalos aquí.",
+  "umbrales": {
+    "margen_operativo_delta_aa_pts": {"bien": -1.0, "atencion": -3.0},
+    "crecimiento_aa_pct": {"bien": 10.0, "atencion": 5.0},
+    "conversion_caja_pct": {"bien": 60.0, "atencion": 40.0},
+    "variacion_utilidad_operativa_vs_guia_pct": {"bien": -2.0, "atencion": -5.0},
+    "deuda_neta_sobre_uo_12m_x": {"bien": 1.0, "atencion": 2.5}
+  },
+  "atipicos": {
+    "conversion_caja_maxima_pct": 100.0,
+    "salto_margen_operativo_vs_periodo_anterior_pts": 5.0,
+    "salto_ingresos_vs_periodo_anterior_pct": 60.0
+  },
+  "sensibilidad_variaciones": [-0.2, -0.1, 0.1, 0.2],
+  "sensibilidad_margen_pts": [-2, -1, 1, 2]
+}

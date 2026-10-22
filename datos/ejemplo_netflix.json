@@ -1,0 +1,260 @@
+{
+ "empresa": {
+  "nombre": "Netflix, Inc.",
+  "ticker": "NFLX",
+  "moneda": "USD",
+  "unidad": "millones"
+ },
+ "periodos": [
+  {
+   "etiqueta": "4T-24",
+   "ingresos": {
+    "valor": 10246.5,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 5767.4,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 2272.8,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 1868.6,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 1378.2,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "caja_e_inversiones": {
+    "valor": 9583.7,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "deuda_total": null,
+   "notas": null
+  },
+  {
+   "etiqueta": "1T-25",
+   "ingresos": {
+    "valor": 10543,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 5263,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 3347,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 2890,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 2661,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "caja_e_inversiones": null,
+   "deuda_total": null,
+   "notas": null
+  },
+  {
+   "etiqueta": "2T-25",
+   "ingresos": {
+    "valor": 11079.2,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 5325.3,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 3774.7,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 3125.4,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 2267.4,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "caja_e_inversiones": null,
+   "deuda_total": null,
+   "notas": null
+  },
+  {
+   "etiqueta": "3T-25",
+   "ingresos": {
+    "valor": 11510.3,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 6164.3,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 3248.2,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 2546.9,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 2660.5,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "caja_e_inversiones": null,
+   "deuda_total": null,
+   "notas": null
+  },
+  {
+   "etiqueta": "4T-25",
+   "ingresos": {
+    "valor": 12050.8,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 6522.6,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 2956.7,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 2418.5,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 1872.3,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "caja_e_inversiones": {
+    "valor": 9062.4,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "deuda_total": {
+    "valor": 14462.8,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "notas": null
+  },
+  {
+   "etiqueta": "1T-26",
+   "ingresos": {
+    "valor": 12249.8,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 5888.2,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 3957.0,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 5282.8,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 5094.1,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "caja_e_inversiones": {
+    "valor": 12289.0,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "deuda_total": {
+    "valor": 14361.0,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "notas": "Los otros ingresos incluyen una indemnización de unos US$2.800 M relacionada con Warner Bros."
+  },
+  {
+   "etiqueta": "2T-26",
+   "ingresos": {
+    "valor": 12559.9,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "costo_ingresos": {
+    "valor": 6037.0,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 4192.6,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "utilidad_neta": {
+    "valor": 3401.4,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "flujo_caja_libre": {
+    "valor": 1525.2,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "caja_e_inversiones": {
+    "valor": 9127.9,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "deuda_total": {
+    "valor": 14309.3,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "notas": null
+  }
+ ],
+ "guias": [
+  {
+   "periodo": "1T-26",
+   "ingresos": {
+    "valor": 12157,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 3906,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   },
+   "margen_operativo": {
+    "valor": 32.1,
+    "fuente": "Carta a accionistas 4T-2025 (tabla de resultados)"
+   }
+  },
+  {
+   "periodo": "2T-26",
+   "ingresos": {
+    "valor": 12574,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 4105,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   },
+   "margen_operativo": {
+    "valor": 32.6,
+    "fuente": "Carta a accionistas 1T-2026 (tabla de resultados)"
+   }
+  },
+  {
+   "periodo": "3T-26",
+   "ingresos": {
+    "valor": 12860,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "utilidad_operativa": {
+    "valor": 4268,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   },
+   "margen_operativo": {
+    "valor": 33.2,
+    "fuente": "Carta a accionistas 2T-2026 (tabla de resultados)"
+   }
+  }
+ ]
+}

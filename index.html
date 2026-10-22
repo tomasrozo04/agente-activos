@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analista de activos</title>
+<meta name="description" content="Agente de IA que analiza un activo con reportes oficiales: la IA lee y redacta, el código calcula y verifica.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2304060a'/%3E%3Cpath d='M5 22l7-8 5 5 10-12' fill='none' stroke='%232dd4d4' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1>Analista de activos</h1>
+    <p class="sub">La IA lee y redacta. El código calcula y verifica. La decisión es tuya.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="aviso-file" class="callout warn" hidden>
+    Abriste el archivo directamente. Para que cargue la carpeta <code>contexto/</code> necesitas un servidor:
+    en la carpeta del proyecto corre <code>python -m http.server 8000</code> y abre <code>http://localhost:8000</code>.
+    (En GitHub Pages esto funciona solo.)
+  </div>
+
+  <section class="card" id="s-config">
+    <h2><span class="n">1</span> Configuración</h2>
+    <div class="grid2">
+      <label>Clave de API de Gemini
+        <input id="clave" type="password" autocomplete="off" placeholder="Pega aquí tu clave de AI Studio">
+      </label>
+      <label>Modelo principal
+        <input id="modelo" value="gemini-3.8-flash">
+      </label>
+      <label>Modelo de respaldo
+        <input id="respaldo" value="gemini-3.5-flash-lite">
+      </label>
+      <label class="chk"><input id="recordar" type="checkbox"> Recordar la clave en este navegador</label>
+    </div>
+    <p class="nota">La clave se queda en tu navegador y solo se envía a Google. No la pegues en un equipo compartido.
+      En el nivel gratuito, lo que envías puede usarse para mejorar productos de Google: sube solo información pública
+      (semáforo verde del curso). Sin clave puedes usar el ejemplo y los cálculos.</p>
+  </section>
+
+  <section class="card" id="s-caso">
+    <h2><span class="n">2</span> ¿Qué quieres hacer?</h2>
+    <div id="casos" class="casos" role="radiogroup" aria-label="Caso de uso"></div>
+    <label id="caja-tesis" hidden>Tu tesis de inversión (qué crees que pasará y por qué)
+      <textarea id="tesis" rows="3" placeholder="Ej.: Compraría NFLX porque los ingresos crecen más de 10% y el margen se mantiene…"></textarea>
+    </label>
+  </section>
+
+  <section class="card" id="s-datos">
+    <h2><span class="n">3</span> Datos del activo</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-tab="docs" role="tab">Subir reportes oficiales</button>
+      <button class="tab" data-tab="json" role="tab">Pegar JSON</button>
+      <button class="tab" data-tab="ej" role="tab">Ejemplo Netflix</button>
+    </div>
+    <div class="panel" id="p-docs">
+      <label>Empresa o ticker (opcional)
+        <input id="empresa" placeholder="Netflix / NFLX">
+      </label>
+      <label>Reportes (PDF, TXT o CSV): cartas a accionistas, 10-Q, 10-K
+        <input id="archivos" type="file" accept=".pdf,.txt,.csv,.md" multiple>
+      </label>
+      <p class="nota" id="lista-archivos">Ningún archivo todavía. Máximo unos 15 MB en total.</p>
+      <button id="btn-extraer" class="btn">Extraer cifras con Gemini</button>
+    </div>
+    <div class="panel" id="p-json" hidden>
+      <p class="nota">Pega aquí un JSON con el mismo formato de <code>datos/ejemplo_netflix.json</code>.</p>
+      <textarea id="json-pegado" rows="8" spellcheck="false" placeholder='{"empresa": {...}, "periodos": [...], "guias": [...]}'></textarea>
+      <button id="btn-pegar" class="btn sec">Usar este JSON</button>
+    </div>
+    <div class="panel" id="p-ej" hidden>
+      <p class="nota">Datos reales de Netflix (cartas a accionistas, 4T-24 a 2T-26) con su fuente. No necesita clave.</p>
+      <button id="btn-ejemplo" class="btn sec">Cargar ejemplo</button>
+    </div>
+    <div id="estado" class="estado" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="card" id="s-rev" hidden>
+    <h2><span class="n">4</span> Revisa lo que se extrajo</h2>
+    <p class="nota">Esto es lo único que la IA leyó. Compara 3 cifras con el documento original y corrige aquí si algo está mal.</p>
+    <div id="cuadres" class="cuadres"></div>
+    <textarea id="json" rows="14" spellcheck="false"></textarea>
+    <button id="btn-calcular" class="btn">Calcular indicadores</button>
+  </section>
+
+  <section class="card" id="s-res" hidden>
+    <h2><span class="n">5</span> Indicadores</h2>
+    <div id="titulo-res" class="titulo-res"></div>
+    <div id="tiles" class="tiles"></div>
+    <div class="grid2 charts">
+      <figure><figcaption>Margen operativo (%)</figcaption><div id="ch-margen"></div></figure>
+      <figure><figcaption>Ingresos por periodo (millones)</figcaption><div id="ch-ing"></div></figure>
+    </div>
+    <h3>Alertas</h3>
+    <ul id="alertas" class="alertas"></ul>
+    <h3>Resultado frente a la guía</h3>
+    <div id="guias" class="tabla-wrap"></div>
+    <h3>Sensibilidad</h3>
+    <div id="sens" class="tabla-wrap"></div>
+    <details><summary>Todos los periodos</summary><div id="tabla" class="tabla-wrap"></div></details>
+    <div class="acciones">
+      <label class="chk"><input id="critica" type="checkbox"> Pedir crítica de un segundo paso (usa más cuota)</label>
+      <button id="btn-redactar" class="btn">Redactar informe con Gemini</button>
+    </div>
+  </section>
+
+  <section class="card" id="s-inf" hidden>
+    <h2><span class="n">6</span> Informe verificado</h2>
+    <div id="verif" class="callout"></div>
+    <article id="informe" class="informe"></article>
+    <div id="crit" class="callout" hidden></div>
+    <div class="acciones">
+      <button id="btn-copiar" class="btn sec">Copiar texto</button>
+      <button id="btn-bajar" class="btn sec">Descargar .md</button>
+    </div>
+  </section>
+
+  <section class="card" id="s-ctx">
+    <h2>Contexto del agente</h2>
+    <p class="nota">Estas son las instrucciones que recibe Gemini (carpeta <code>contexto/</code>). Edita los archivos del repositorio para cambiar el comportamiento.</p>
+    <details><summary>Ver instrucciones completas</summary><pre id="ctx"></pre></details>
+  </section>
+</main>
+
+<footer class="wrap pie">
+  Herramienta de apoyo para estudio; no es asesoría de inversión. No dice comprar, vender ni mantener.
+</footer>
+
+<script src="js/calculos.js"></script>
+<script src="js/gemini.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

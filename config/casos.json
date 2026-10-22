@@ -1,0 +1,38 @@
+[
+  {
+    "id": "resultados",
+    "nombre": "Resultados frente a la guía",
+    "resumen": "Informe de una página después de un reporte trimestral.",
+    "entregable": "Informe ejecutivo de una página",
+    "tarea": "Redacta el informe ejecutivo de una página con esta estructura: 1) Titular de una línea con la conclusión. 2) Tabla: indicador | real | guía o año anterior | variación | estado. 3) Tres hallazgos, cada uno con su cifra y su 'entonces qué'. 4) Alertas con su estado y la regla que las disparó. 5) Hechos, hipótesis y datos que faltan (lista corta). 6) Escenarios y sensibilidad en una línea o tabla pequeña. 7) Qué debe verificar la persona antes de usarlo. 8) Supuestos usados y lo que quedó por fuera."
+  },
+  {
+    "id": "escenarios",
+    "nombre": "Escenarios y sensibilidad",
+    "resumen": "Cómo cambia la utilidad operativa si cambian ingresos o margen.",
+    "entregable": "Tabla de escenarios (bajo, base, alto) y sensibilidad",
+    "tarea": "Presenta tres escenarios (bajo, base, alto) y la sensibilidad usando SOLO calculos.sensibilidad. Entrega: 1) una tabla con la utilidad operativa de 12 meses si cambian los ingresos y si cambia el margen, 2) qué variable pesa más y por cuánto, 3) qué dato nuevo haría cambiar de escenario, 4) supuestos y límites. No inventes probabilidades ni cifras que no estén en el JSON."
+  },
+  {
+    "id": "cambios",
+    "nombre": "Qué cambió entre reportes",
+    "resumen": "Diferencias entre el último periodo y el anterior, y frente al año previo.",
+    "entregable": "Resumen de cambios ordenado por impacto",
+    "tarea": "Resume qué cambió entre el último periodo y el anterior, y frente al mismo periodo del año previo, usando calculos.cambios y calculos.periodos. Entrega: 1) titular de una línea, 2) tabla de cambios ordenada por impacto (indicador | antes | ahora | cambio | estado), 3) para los tres cambios más grandes: hecho, hipótesis y dato que falta, 4) tres puntos a vigilar en el próximo reporte."
+  },
+  {
+    "id": "caso_practico",
+    "nombre": "Caso práctico del activo",
+    "resumen": "Documento de dos a tres páginas para estudiar un activo.",
+    "entregable": "Caso práctico de dos a tres páginas",
+    "tarea": "Redacta un caso práctico de dos a tres páginas del activo con estas secciones: 1) Resumen y semáforo general. 2) Rentabilidad (márgenes y su tendencia). 3) Caja y deuda. 4) Resultado frente a la guía. 5) Riesgos y alertas. 6) Hechos, hipótesis y datos que faltan. 7) Preguntas para investigar. Habla del negocio de la empresa solo si está en los documentos. Cierra con qué debe verificar la persona. Sin recomendación de compra o venta."
+  },
+  {
+    "id": "critica",
+    "nombre": "Crítica de la tesis (abogado del diablo)",
+    "resumen": "Ataca tu tesis de inversión con un pre-mortem.",
+    "entregable": "Crítica con causas de fracaso y señales tempranas",
+    "necesitaTesis": true,
+    "tarea": "Actúa como miembro escéptico de un comité de inversiones. Recibes la TESIS de la persona y los datos. Imagina que dentro de tres meses la tesis fracasó. Entrega: 1) las cinco causas más probables del fracaso, 2) para cada una, la señal temprana que se habría podido ver en los datos, 3) el supuesto más débil de la tesis y el dato que lo confirmaría o descartaría, 4) la pregunta más incómoda que haría el comité. Sé duro, no busques complacer. Usa solo cifras del JSON. No recomiendes comprar ni vender."
+  }
+]
